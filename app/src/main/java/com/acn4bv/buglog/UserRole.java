@@ -23,4 +23,9 @@ public class UserRole {
         if (user == null) return false;
         return TESTER_EMAIL.equalsIgnoreCase(user.getEmail());
     }
+
+    public static void clear() {
+        FirebaseAuth.getInstance().signOut();
+    }
+
 }
