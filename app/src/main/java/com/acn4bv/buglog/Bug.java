@@ -19,53 +19,18 @@ public class Bug {
         this.descripcion = descripcion;
     }
 
-    // ID
-    public String getId() {
-        return id;
-    }
-    public void setId(String id) {
-        this.id = id;
-    }
+    public String getId() { return id; }
+    public void setId(String id) { this.id = id; }
 
-    // Getters
-    public String getNombreJuego() {
-        return nombreJuego;
-    }
+    public String getNombreJuego() { return nombreJuego; }
+    public String getPlataforma()  { return plataforma; }
+    public String getTipo()        { return tipo; }
+    public String getGravedad()    { return gravedad; }
+    public String getDescripcion() { return descripcion; }
 
-    public String getPlataforma() {
-        return plataforma;
-    }
-
-    public String getTipo() {
-        return tipo;
-    }
-
-    public String getGravedad() {
-        return gravedad;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    // Setters
-    public void setNombreJuego(String nombreJuego) {
-        this.nombreJuego = nombreJuego;
-    }
-
-    public void setPlataforma(String plataforma) {
-        this.plataforma = plataforma;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
-
-    public void setGravedad(String gravedad) {
-        this.gravedad = gravedad;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
+    public void setNombreJuego(String nombreJuego) { this.nombreJuego = nombreJuego; }
+    public void setPlataforma(String plataforma)   { this.plataforma = plataforma; }
+    public void setTipo(String tipo)               { this.tipo = tipo; }
+    public void setGravedad(String gravedad)       { this.gravedad = gravedad; }
+    public void setDescripcion(String descripcion) { this.descripcion = descripcion; }
 }

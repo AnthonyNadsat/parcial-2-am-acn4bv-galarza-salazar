@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Tema oscuro más profundo -->
+
+    <!-- Tema oscuro -->
     <color name="background_color">#0F0F1E</color>
     <color name="card_background">#1F1F2E</color>
     <color name="text_primary">#FFFFFF</color>
     <color name="text_secondary">#6B7280</color>
     <color name="border_color">#2A2A3E</color>
+
+    <!-- Modal -->
+    <color name="bg_primary">#0F0F1E</color>
+    <color name="bg_secondary">#1F1F2E</color>
 
     <!-- Colores morados/violetas -->
     <color name="purple_primary">#8B5CF6</color>
@@ -15,4 +20,5 @@
     <color name="button_gradient_start">#EC4899</color>
     <color name="button_gradient_end">#8B5CF6</color>
     <color name="button_green">#10B981</color>
+
 </resources>

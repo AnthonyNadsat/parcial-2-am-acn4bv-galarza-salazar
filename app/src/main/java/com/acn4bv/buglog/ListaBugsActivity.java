@@ -1,7 +1,5 @@
 package com.acn4bv.buglog;
 
-import static android.provider.Settings.System.getString;
-
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
@@ -9,13 +7,19 @@ import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.ViewGroup;
+import android.view.View;
+import android.widget.Spinner;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -38,7 +42,7 @@ public class ListaBugsActivity extends AppCompatActivity {
 
         containerBugs = findViewById(R.id.containerBugs);
 
-        db = FirebaseFirestore.getInstance(); // inicializar Firestore
+        db = FirebaseFirestore.getInstance();
 
         Button btnVolver = findViewById(R.id.btnVolver);
         btnVolver.setOnClickListener(v -> {
@@ -150,9 +154,9 @@ public class ListaBugsActivity extends AppCompatActivity {
                     for (Bug bug : bugsFiltrados) {
                         containerBugs.addView(crearCard(bug, marginTop, padding));
                     }
-
                 });
     }
+
 
     private List<Bug> filtrar(List<Bug> fuente, String filtro) {
         if ("TODOS".equals(filtro)) return fuente;
@@ -201,14 +205,14 @@ public class ListaBugsActivity extends AppCompatActivity {
             LinearLayout row = new LinearLayout(this);
             row.setOrientation(LinearLayout.HORIZONTAL);
 
-            // Botón Editar
+            // Boton Editar
             Button btnEditar = new Button(this);
             btnEditar.setText("Editar");
             btnEditar.setAllCaps(false);
             btnEditar.setTextSize(12f);
             btnEditar.setOnClickListener(v -> editarBug(bug));
 
-            // Botón Borrar
+            // Boton Borrar
             Button btnBorrar = new Button(this);
             btnBorrar.setText("Borrar");
             btnBorrar.setAllCaps(false);
@@ -224,6 +228,7 @@ public class ListaBugsActivity extends AppCompatActivity {
         return card;
     }
 
+
     private void borrarBug(Bug bug) {
         db.collection("bugs")
                 .document(bug.getId())
@@ -233,7 +238,90 @@ public class ListaBugsActivity extends AppCompatActivity {
 
     private void editarBug(Bug bug) {
 
+        BottomSheetDialog dialog = new BottomSheetDialog(this);
+        View view = getLayoutInflater().inflate(R.layout.modal_editar_bug, null);
+        dialog.setContentView(view);
+
+        EditText etNombre      = view.findViewById(R.id.etEditNombre);
+        EditText etDescripcion = view.findViewById(R.id.etEditDescripcion);
+
+        Spinner spPlataforma   = view.findViewById(R.id.spEditPlataforma);
+        Spinner spTipo         = view.findViewById(R.id.spEditTipo);
+        Spinner spGravedad     = view.findViewById(R.id.spEditGravedad);
+
+        Button btnGuardar  = view.findViewById(R.id.btnGuardar);
+        Button btnCancelar = view.findViewById(R.id.btnCancelar);
+
+        etNombre.setText(bug.getNombreJuego());
+        etDescripcion.setText(bug.getDescripcion());
+
+        ArrayAdapter<CharSequence> adapterPlataforma = ArrayAdapter.createFromResource(
+                this,
+                R.array.plataformas,
+                R.layout.spinner_item
+        );
+        adapterPlataforma.setDropDownViewResource(R.layout.spinner_dropdown_item);
+        spPlataforma.setAdapter(adapterPlataforma);
+
+
+        int posPlataforma = adapterPlataforma.getPosition(bug.getPlataforma());
+        if (posPlataforma >= 0) spPlataforma.setSelection(posPlataforma);
+
+
+        ArrayAdapter<CharSequence> adapterTipo = ArrayAdapter.createFromResource(
+                this,
+                R.array.tipos_bug,
+                R.layout.spinner_item
+        );
+        adapterTipo.setDropDownViewResource(R.layout.spinner_dropdown_item);
+        spTipo.setAdapter(adapterTipo);
+
+        int posTipo = adapterTipo.getPosition(bug.getTipo());
+        if (posTipo >= 0) spTipo.setSelection(posTipo);
+
+
+        ArrayAdapter<CharSequence> adapterGravedad = new ArrayAdapter<>(
+                this,
+                R.layout.spinner_item,
+                new String[]{"Baja", "Media", "Alta"}
+        );
+        adapterGravedad.setDropDownViewResource(R.layout.spinner_dropdown_item);
+        spGravedad.setAdapter(adapterGravedad);
+
+        int posGrav = adapterGravedad.getPosition(bug.getGravedad());
+        if (posGrav >= 0) spGravedad.setSelection(posGrav);
+
+        // Cancelar
+        btnCancelar.setOnClickListener(v -> dialog.dismiss());
+
+        // Guardar cambios
+        btnGuardar.setOnClickListener(v -> {
+
+            String nombre      = etNombre.getText().toString().trim();
+            String plataforma  = spPlataforma.getSelectedItem().toString();
+            String tipo        = spTipo.getSelectedItem().toString();
+            String gravedad    = spGravedad.getSelectedItem().toString();
+            String descripcion = etDescripcion.getText().toString().trim();
+
+            db.collection("bugs")
+                    .document(bug.getId())
+                    .update(
+                            "nombreJuego", nombre,
+                            "plataforma", plataforma,
+                            "tipo", tipo,
+                            "gravedad", gravedad,
+                            "descripcion", descripcion
+                    )
+                    .addOnSuccessListener(unused -> {
+                        cargarBugs();
+                        dialog.dismiss();
+                    });
+        });
+
+        dialog.show();
     }
+
+
 
     private TextView crearBadgeGravedad(String gravedad) {
         if (gravedad == null) return null;

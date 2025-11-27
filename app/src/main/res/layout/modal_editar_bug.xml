@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:background="@color/bg_secondary">
+
+    <TextView
+        android:id="@+id/txtTitulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Editar bug"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:textColor="@color/text_primary"
+        android:paddingBottom="12dp" />
+
+    <!-- Nombre del juego -->
+    <EditText
+        android:id="@+id/etEditNombre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nombre del juego"
+        android:background="@drawable/input_background"
+        android:textColor="@color/text_primary"
+        android:textColorHint="@color/text_secondary"
+        android:padding="12dp"
+        android:layout_marginBottom="12dp"/>
+
+    <!-- Plataforma -->
+    <Spinner
+        android:id="@+id/spEditPlataforma"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/input_background"
+        android:padding="12dp"
+        android:layout_marginBottom="12dp"/>
+
+    <!-- Tipo de bug -->
+    <Spinner
+        android:id="@+id/spEditTipo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/input_background"
+        android:padding="12dp"
+        android:layout_marginBottom="12dp"/>
+
+    <!-- Gravedad -->
+    <Spinner
+        android:id="@+id/spEditGravedad"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/input_background"
+        android:padding="12dp"
+        android:layout_marginBottom="12dp"/>
+
+    <!-- Descripción -->
+    <EditText
+        android:id="@+id/etEditDescripcion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Descripción"
+        android:background="@drawable/input_background"
+        android:textColorHint="@color/text_secondary"
+        android:textColor="@color/text_primary"
+        android:minLines="3"
+        android:gravity="top"
+        android:padding="12dp"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Botones -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="end">
+
+        <Button
+            android:id="@+id/btnCancelar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cancelar"
+            android:background="@android:color/transparent"
+            android:textColor="@color/text_primary"
+            android:padding="8dp"/>
+
+        <Button
+            android:id="@+id/btnGuardar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Guardar"
+            android:textColor="@color/text_primary"
+            android:background="@android:color/transparent"
+            android:padding="8dp"/>
+    </LinearLayout>
+
+</LinearLayout>
