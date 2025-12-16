@@ -1,15 +1,15 @@
-# Informe del Proyecto: 🪲 BugLog
-## Parcial 2 - Aplicaciones Móviles (ACN4BV)
+# Informe del Proyecto:  🪲 BugLog
+## Final - Aplicaciones Móviles (ACN4BV)
 
-**Repositorio:** AnthonyNadsat/parcial-2-am-acn4bv-galarza-salazar  
+**Repositorio:** AnthonyNadsat/final-am-acn4bv-galarza-salazar  
 **Equipo:** Galarza & Salazar  
-**Descripción:** Parcial evolutivo de Aplicaciones Móviles en Escuela Da Vinci
+**Descripción:** Proyecto Final evolutivo de Aplicaciones Móviles en Escuela Da Vinci
 
 ---
 
 ## 📋 Descripción
 
-BugLog es una aplicación móvil desarrollada en Android que permite a los usuarios reportar y gestionar bugs encontrados en videojuegos de manera organizada y eficiente.  Cuenta con un sistema de autenticación, roles de usuario (Admin y Tester), formulario interactivo de registro, historial visual con Firebase Realtime Database y funcionalidades de gestión según permisos.
+BugLog es una aplicación móvil desarrollada en Android que permite a los usuarios reportar y gestionar bugs encontrados en videojuegos de manera organizada y eficiente.  Cuenta con un sistema de autenticación, roles de usuario (Admin y Tester), formulario interactivo de registro, historial visual con Firebase Realtime Database, funcionalidades de gestión según permisos y sistema de gestión de usuarios. 
 
 ---
 
@@ -17,10 +17,11 @@ BugLog es una aplicación móvil desarrollada en Android que permite a los usuar
 
 - 🔐 **Sistema de Autenticación:** Login y Logout con Firebase Authentication
 - 👥 **Roles de Usuario:** Sistema de permisos diferenciados (Admin y Tester)
+- 👤 **Gestión de Usuarios:** Sistema completo para administrar usuarios
 - 📝 **Formulario de Reporte:** Interfaz intuitiva para registrar bugs con validación de datos
 - 📚 **Historial de Bugs:** Visualización de reportes en formato de tarjetas (cards) con datos en tiempo real
 - 🔄 **Navegación Fluida:** Sistema de navegación bidireccional entre vistas
-- 🎨 **Diseño Moderno:** Interfaz de usuario renovada y pulida
+- 🎨 **Diseño Moderno:** Interfaz de usuario completamente rediseñada
 - 🔍 **Filtrado:** Botón flotante para filtrar bugs en el historial
 - ⬅️ **Navegación Intuitiva:** Botón de retorno para volver a la vista principal
 - 🔥 **Integración Firebase:** Base de datos en tiempo real y autenticación de usuarios
@@ -32,12 +33,12 @@ BugLog es una aplicación móvil desarrollada en Android que permite a los usuar
 
 1. **Clonar el repositorio**
 ```bash
-git clone https://github.com/AnthonyNadsat/parcial-2-am-acn4bv-galarza-salazar.git
+git clone https://github.com/AnthonyNadsat/final-am-acn4bv-galarza-salazar.git
 ```
 
 2. **Abrir en Android Studio**
 ```bash
-cd parcial-2-am-acn4bv-galarza-salazar
+cd final-am-acn4bv-galarza-salazar
 ```
 Luego abre el proyecto desde Android Studio
 
@@ -51,11 +52,11 @@ Luego abre el proyecto desde Android Studio
 
 
    ```
-   parcial-2-am-acn4bv-galarza-salazar/
+   final-am-acn4bv-galarza-salazar/
    └── app/
        └── google-services.json
    ```
-   - **Importante:** Este archivo contiene configuraciones sensibles y no debe ser compartido públicamente.  No está incluido en el repositorio por seguridad.
+   - **Importante:** Este archivo contiene configuraciones sensibles y no debe ser compartido públicamente.  No está incluido en el repositorio por seguridad. 
 
 
 ---
@@ -75,27 +76,28 @@ Campo contraseña no puede estar vacío
 Muestra error en el campo correspondiente si falta dato
 
 
-Autenticación:
+Autenticación: 
 
-Convierte usuario a email: {usuario}@buglog.com
+Convierte usuario a email:  {usuario}@buglog.com
 Llama a FirebaseAuth.signInWithEmailAndPassword()
 Maneja respuestas asíncronas con listeners
 
 
-Usuarios válidos:
+Usuarios válidos: 
 
 admin@buglog.com - Permisos de administrador (editar/borrar bugs)
-tester@buglog.com - Permisos de tester (solo reportar/ver bugs)
+tester@buglog. com - Permisos de tester (solo reportar/ver bugs)
 
 
 Persistencia de sesión:
 
-Si ya existe usuario autenticado (auth.getCurrentUser() != null)
+Si ya existe usuario autenticado (auth. getCurrentUser() != null)
 Redirección automática a MainActivity sin mostrar login
-****
 
 ![Pantalla1](https://github.com/user-attachments/assets/3855aa7c-df49-4e04-af6c-5cc363caacdd)
-<img width="529" height="1113" alt="login" src="https://github.com/user-attachments/assets/fd121b47-5c45-4d5f-9e68-47a7b05820e3" />
+
+![Login buglog actualizado](https://github.com/user-attachments/assets/19d58943-4c47-4029-9538-1e6d6a598aa1)
+
 
 
 ### Pantalla Secundaria - Formulario de Reporte
@@ -111,16 +113,18 @@ Si todo está completo → Bug guardado en Firebase, mensaje de éxito, formular
 Si falta algún campo → Mensaje de error indicando qué campo falta
 
 <img width="390" height="995" alt="wireframe_form" src="https://github.com/user-attachments/assets/ec487ba9-3c0f-46d0-9b43-a54ab46e6c93" />
-<img width="515" height="1129" alt="formm" src="https://github.com/user-attachments/assets/bd1ad292-1171-4e65-9291-9605b3ccb1e8" />
+
+![reportebugs](https://github.com/user-attachments/assets/cd858dec-1a63-4b92-87dc-ab1e215d5502)
 
 
 
-### Pantalla Tercearia - Historial de Bugs
+
+### Pantalla Terciaria - Historial de Bugs
 
 El usuario accede desde MainActivity presionando "Consultar historial"
 El sistema carga y muestra todos los bugs reportados en formato de cards
 
-El usuario puede:
+El usuario puede: 
 Scroll para ver todos los bugs
 Filtrar presionando el botón flotante y seleccionando una gravedad (Todos/Baja/Media/Alta)
 Volver a MainActivity presionando la flecha "←"
@@ -128,17 +132,42 @@ Volver a MainActivity presionando la flecha "←"
 
 Si el usuario es admin, cada card tiene botones "Editar" y "Borrar"
 Para editar: Presiona "Editar" → Se abre modal con datos → Modifica campos → Presiona "Guardar" → Bug actualizado
-Para borrar: Presiona "Borrar" → Bug eliminado inmediatamente de Firestore y desaparece de la lista
+Para borrar:  Presiona "Borrar" → Bug eliminado inmediatamente de Firestore y desaparece de la lista
 
 <img width="390" height="995" alt="wireframe_list" src="https://github.com/user-attachments/assets/3ef0142f-b04c-4e65-879b-96577f7fb6f7" />
-<img width="510" height="1144" alt="reporte" src="https://github.com/user-attachments/assets/3879e6ce-ea4d-47b6-b295-1defcb3ebda8" />
+
+
+![Historial de reportes](https://github.com/user-attachments/assets/55eb0bce-1a03-48d3-81ab-16fa58ed3edc)
+
+
+
+### Pantalla Cuarta - Gestión de Usuarios
+El usuario administrador accede desde MainActivity presionando "Gestión de Usuarios" El sistema carga y muestra todos los usuarios registrados en formato de cards
+
+Cada card muestra:
+
+Badge de rol (ADMINISTRADOR/TESTER)
+Nombre, email y fecha de creación
+Botones "Eliminar" y "Editar"
+El administrador puede:
+
+Ver todos los usuarios registrados
+Crear nuevo usuario presionando "+ Nuevo" → Completa nombre, email, contraseña y rol → Presiona "CREAR"
+Editar usuario presionando "Editar" → Modifica campos → Presiona "Guardar"
+Eliminar usuario presionando "Eliminar" → Usuario eliminado de Firestore
+Volver a MainActivity con la flecha "←"
+⚠️ Nota: Pantalla exclusiva para administradores
+
+![Creacion de usario buglog](https://github.com/user-attachments/assets/424f621b-606c-4ecf-a5d1-a003f301e3b4)
+
+![usuario creado ](https://github.com/user-attachments/assets/7b2c0832-8fa7-4880-a003-901553367a0e)
 
 
 ---
 
 ## 📊 Resumen
 
-Este proyecto corresponde al desarrollo colaborativo evolutivo de una aplicación Android llamada **BugLog**, diseñada para el reporte y seguimiento de bugs/glitches encontrados en videojuegos.  Incluye autenticación de usuarios, sistema de roles, integración con Firebase y gestión completa de reportes según permisos.
+Este proyecto corresponde al desarrollo colaborativo evolutivo de una aplicación Android llamada **BugLog**, diseñada para el reporte y seguimiento de bugs/glitches encontrados en videojuegos.  Incluye autenticación de usuarios, sistema de roles, integración con Firebase, gestión completa de reportes según permisos y sistema de gestión de usuarios. 
 
 ---
 
@@ -149,7 +178,8 @@ Este proyecto corresponde al desarrollo colaborativo evolutivo de una aplicació
 
 ### Tecnologías y Servicios
 - **Firebase Authentication:** Sistema de login y gestión de usuarios
-- **Firebase Realtime Database:** Almacenamiento y sincronización de datos en tiempo real
+- **Firebase Firestore:** Almacenamiento y sincronización de datos en tiempo real
+- **Glide:** Carga de imágenes desde URLs
 
 
 
@@ -169,7 +199,7 @@ Este proyecto corresponde al desarrollo colaborativo evolutivo de una aplicació
 - **Hash:** `c4fac99`
 - **Fecha:** 29 de septiembre, 2025
 - **Mensaje:** `chore(base-setup): Estructura inicial del proyecto Android`
-- **Descripción:** Configuración base del proyecto Android con estructura de carpetas y archivos iniciales.
+- **Descripción:** Configuración base del proyecto Android con estructura de carpetas y archivos iniciales. 
 
 ---
 
@@ -198,7 +228,7 @@ Este proyecto corresponde al desarrollo colaborativo evolutivo de una aplicació
 - **Hash:** `0b007cc`
 - **Fecha:** 1 de octubre, 2025
 - **Mensaje:** `feat(ui): rediseño completo de BugLog (formulario e historial)`
-- **Descripción:** Renovación de la interfaz de usuario con mejoras visuales tanto del formulario como del historial de bugs.
+- **Descripción:** Renovación de la interfaz de usuario con mejoras visuales tanto del formulario como del historial de bugs. 
 
 ---
 
@@ -207,16 +237,16 @@ Este proyecto corresponde al desarrollo colaborativo evolutivo de una aplicació
 #### Commit 5: Botón de Retorno
 - **Autor:** Lukarda
 - **Hash:** `ac73b68`
-- **Fecha:** 5 de octubre, 2025
+- **Fecha:** 2 de octubre, 2025
 - **Mensaje:** `feat(list): boton volver para regresar a la vista principal`
-- **Descripción:** Implementación de un botón para retornar desde el historial a la pantalla principal.
+- **Descripción:** Implementación de un botón para retornar desde el historial a la pantalla principal. 
 
 #### Commit 6: Recuperación de Archivos
 - **Autor:** Lukarda
-- **Hash:** `ae7248b`
-- **Fecha:** 5 de octubre, 2025
+- **Hash:** `ee7245b`
+- **Fecha:** 2 de octubre, 2025
 - **Mensaje:** `fix(list): recupera archivos de pantalla de historial`
-- **Descripción:** Corrección y recuperación de archivos relacionados con la pantalla de historial.
+- **Descripción:** Corrección y recuperación de archivos relacionados con la pantalla de historial. 
 
 ---
 
@@ -224,89 +254,115 @@ Este proyecto corresponde al desarrollo colaborativo evolutivo de una aplicació
 
 #### Commit 7: Botón Flotante y Ajustes Finales
 - **Autor:** Lukarda y AnthonyNadsat
-- **Hash:** `6ff6025`
-- **Fecha:** 5 de octubre, 2025
+- **Hash:** `6ff6925`
+- **Fecha:** 6 de octubre, 2025
 - **Mensaje:** `feat(list-ui): boton flotante de filtro y ajustes visuales en historial de bugs`
 - **Descripción:** Implementación de botón flotante para funcionalidad de filtrado y refinamiento en la experiencia de usuario del historial.
 
-#### Commit 8: Wireframe Agregado
+#### Commit 8: Informe del Parcial 1
 - **Autor:** AnthonyNadsat
-- **Hash:** `4c7de4a`
-- **Fecha:** 7 de octubre, 2025
-- **Mensaje:** `fix(readme): wireframe faltante agregado`
-- **Descripción:** Incorporación de wireframes faltantes en la documentación del README.
-
-#### Commit 9: Informe del Parcial 1
-- **Autor:** Lukarda
-- **Hash:** `f9a0dc4`
-- **Fecha:** 7 de octubre, 2025
+- **Hash:** `f30e0c4`
+- **Fecha:** 6 de octubre, 2025
 - **Mensaje:** `docs(readme): informe del parcial`
 - **Descripción:** Creación del informe completo del Parcial 1 con documentación detallada del proyecto.
 
+#### Commit 9: Wireframe Agregado
+- **Autor:** AnthonyNadsat
+- **Hash:** `4c7c6da`
+- **Fecha:** 7 de octubre, 2025
+- **Mensaje:** `fix(readme): wireframe faltante agregado`
+- **Descripción:** Incorporación de wireframes faltantes en la documentación del README. 
+
 ---
 
-### **Fase 6: Integración Firebase - Inicio Parcial 2 (Octubre 2025)**
+### **Fase 6: Integración Firebase - Inicio Parcial 2 (Noviembre 2025)**
 
 #### Commit 10: Configuración Firebase y Firestore
 - **Autor:** AnthonyNadsat
-- **Hash:** `1db4fba`
-- **Fecha:** 25 de octubre, 2025
-- **Mensaje:** `feat: reemplazado almacenamiento local e integrado Firebase Firestore como base de datos`
+- **Hash:** `1db476a`
+- **Fecha:** 26 de noviembre, 2025
+- **Mensaje:** `feat:  reemplazado almacenamiento local e integrado Firebase Firestore como base de datos`
 - **Descripción:** Migración completa del almacenamiento local a Firebase Firestore para persistencia de datos en la nube.
 
 ---
 
-### **Fase 7: Sistema de Autenticación y Roles (Octubre 2025)**
+### **Fase 7: Sistema de Autenticación y Roles (Noviembre 2025)**
 
 #### Commit 11: Login con Firebase Auth
 - **Autor:** Lukarda
-- **Hash:** `84f20b1`
-- **Fecha:** 25 de octubre, 2025
-- **Mensaje:** `feat: implementado login con Firebase Auth y control de roles`
+- **Hash:** `84720d1`
+- **Fecha:** 27 de noviembre, 2025
+- **Mensaje:** `feat:  implementado login con Firebase Auth y control de roles`
 - **Descripción:** Desarrollo completo del sistema de autenticación con Firebase Auth y diferenciación de roles (Admin/Tester).
 
 ---
 
-### **Fase 8: Funciones de Administrador (Octubre 2025)**
+### **Fase 8: Funciones de Administrador (Noviembre 2025)**
 
 #### Commit 12: Botones de Editar y Borrar Parcial
 - **Autor:** Lukarda
-- **Hash:** `0b57182`
-- **Fecha:** 25 de octubre, 2025
+- **Hash:** `0a53192`
+- **Fecha:** 27 de noviembre, 2025
 - **Mensaje:** `feat(admin): implementacion parcial de botones de editar y borrar en lista de bugs`
-- **Descripción:** Primera implementación de funcionalidades de administrador para editar y borrar bugs.
+- **Descripción:** Primera implementación de funcionalidades de administrador para editar y borrar bugs. 
 
 #### Commit 13: Modal de Edición Completo
 - **Autor:** AnthonyNadsat
-- **Hash:** `59d6f39`
-- **Fecha:** 25 de octubre, 2025
+- **Hash:** `594f939`
+- **Fecha:** 27 de noviembre, 2025
 - **Mensaje:** `feat(admin): implementado boton para editar con modal en lista de bugs`
 - **Descripción:** Implementación completa del modal de edición con todos los campos editables para administradores.
 
 ---
 
-### **Fase 9: Mejoras Visuales y Funcionalidades Extra (Octubre-Noviembre 2025)**
+### **Fase 9: Mejoras Visuales y Funcionalidades Extra (Noviembre 2025)**
 
 #### Commit 14: Logout Funcional
 - **Autor:** Lukarda
 - **Hash:** `cf687a4`
-- **Fecha:** 25 de octubre, 2025
-- **Mensaje:** `feat: logout funcional integrado`
+- **Fecha:** 27 de noviembre, 2025
+- **Mensaje:** `feat:  logout funcional integrado`
 - **Descripción:** Implementación del botón de logout con cierre de sesión correcto en Firebase Auth.
 
 #### Commit 15: Carga de Imágenes desde URL
 - **Autor:** Lukarda
-- **Hash:** `6b9a3ef`
+- **Hash:** `65b5bf1`
 - **Fecha:** 27 de noviembre, 2025
-- **Mensaje:** `feat: agregado campo de URL y carga de imagenes en reportes`
+- **Mensaje:** `feat:  agregado campo de URL y carga de imagenes en reportes`
 - **Descripción:** Integración de Glide para cargar imágenes desde URLs en los reportes de bugs.
 
-#### Commit 16: Rediseño Visual Final
+#### Commit 16: Rediseño Visual Final Parcial 2
 - **Autor:** AnthonyNadsat
 - **Hash:** `ab6a5cf`
-- **Fecha:** 27 de noviembre, 2025
-- **Mensaje:** `feat: rediseño a pantalla de login y mejoras visuales en lista de bugs`
+- **Fecha:** 28 de noviembre, 2025
+- **Mensaje:** `feat:  rediseño a pantalla de login y mejoras visuales en lista de bugs`
 - **Descripción:** Rediseño completo de la interfaz de login con diseño moderno centrado y mejoras visuales en el historial con cards horizontales y formato de póster para imágenes.
+
+#### Commit 17: Informe del Parcial 2
+- **Autor:** Lukarda
+- **Hash:** `91f75af`
+- **Fecha:** 28 de noviembre, 2025
+- **Mensaje:** `docs(readme): informe del parcial 2`
+- **Descripción:** Informe de parcial evolutivo con documentación actualizada. 
+
+---
+
+### **Fase 10: Final - Nuevas Funcionalidades (Diciembre 2025)**
+
+#### Commit 18: Rediseño Completo Final
+- **Autor:** AnthonyNadsat
+- **Hash:** `7d3a1dc`
+- **Fecha:** 12 de diciembre, 2025
+- **Mensaje:** `feat: nuevo rediseño completo de BugLog`
+- **Descripción:** Rediseño completo de la aplicación BugLog con mejoras visuales para la entrega final.
+
+#### Commit 19: Sistema de Gestión de Usuarios
+- **Autor:** Lukarda
+- **Hash:** `8bc5f66`
+- **Fecha:** 16 de diciembre, 2025
+- **Mensaje:** `feat: implementado sistema de gestion de usuarios`
+- **Descripción:** Implementación completa del sistema de gestión de usuarios para administradores. 
+
 ---
 
 ## 🎯 Funcionalidades Implementadas
@@ -319,8 +375,12 @@ Este proyecto corresponde al desarrollo colaborativo evolutivo de una aplicació
 
 ### ✅ Módulo de Roles
 - Rol **Admin**: Acceso completo con permisos de edición y eliminación
-- Rol **Tester**: Acceso para reportar y visualizar bugs
+- Rol **Tester**:  Acceso para reportar y visualizar bugs
 - Validación de permisos según el rol del usuario
+
+### ✅ Módulo de Gestión de Usuarios
+- Sistema completo para administrar usuarios
+- Control y visualización de usuarios registrados
 
 ### ✅ Módulo de Registro
 - Formulario completo de reporte de bugs
@@ -341,7 +401,7 @@ Este proyecto corresponde al desarrollo colaborativo evolutivo de una aplicació
 
 ### ✅ Integración Firebase
 - Firebase Authentication para login/logout
-- Firebase Database para almacenamiento
+- Firebase Firestore para almacenamiento
 - Sincronización de datos en tiempo real
 - Configuración mediante google-services.json
 
@@ -372,17 +432,18 @@ Este proyecto corresponde al desarrollo colaborativo evolutivo de una aplicació
 
 ## 🔄 Flujo de Trabajo
 
-El equipo utilizó un flujo de trabajo colaborativo basado en Git:
+El equipo utilizó un flujo de trabajo colaborativo basado en Git: 
 
 1. **Desarrollo paralelo** - Ambos desarrolladores trabajaron en diferentes módulos simultáneamente
 2. **Integración continua** - Merge regular de cambios a la rama master
 3. **Conventional Commits** - Uso de prefijos semánticos (feat, fix, chore, refactor)
-4. **Desarrollo evolutivo** - Parcial 2 construido sobre la base del Parcial 1
+4. **Desarrollo evolutivo** - Final construido sobre la base de los Parciales 1 y 2
 
 ### Patrones de Commit Utilizados
 - `feat(módulo):` - Nuevas funcionalidades
 - `fix(módulo):` - Corrección de bugs
 - `chore(módulo):` - Tareas de mantenimiento
+- `docs(módulo):` - Documentación
 - `refactor(módulo):` - Refactorización y optimización
 
 ---
@@ -400,14 +461,20 @@ El equipo utilizó un flujo de trabajo colaborativo basado en Git:
 - ✅ Integración exitosa con Firebase/Firestore
 - ✅ Sistema de autenticación 
 - ✅ Roles de usuario implementados
-- ✅ Implementación de URL para Imagenes
+- ✅ Implementación de URL para Imágenes
 - ✅ Permisos diferenciados (Admin/Tester)
 - ✅ Sincronización en tiempo real
 - ✅ Gestión completa de bugs mediante CRUD
 - ✅ Rediseño visual de la interfaz
 
+### Final (Evolutivo)
+- ✅ Nuevo rediseño completo de la aplicación
+- ✅ Sistema de gestión de usuarios implementado
+- ✅ Mejoras visuales finales
+- ✅ Aplicación completamente funcional y pulida
+
 ---
 
 ## 📝 Conclusiones
 
-El proyecto **BugLog** fue desarrollado evolutivamente en dos parciales.
+El proyecto **BugLog** fue desarrollado evolutivamente a lo largo de tres entregas:  Parcial 1, Parcial 2 y Final.  Cada fase construyó sobre la anterior, agregando nuevas funcionalidades y mejoras visuales.  El resultado final es una aplicación Android completa y funcional para la gestión de bugs en videojuegos, con autenticación de usuarios, roles diferenciados, y un sistema de gestión de usuarios para administradores. 
