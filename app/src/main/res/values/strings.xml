@@ -126,4 +126,24 @@
     <!-- Lista vacía -->
     <string name="no_bugs">No hay bugs reportados</string>
 
+
+    <!-- Gestión de Usuarios -->
+    <string name="gestion_usuarios_titulo">Gestión de Usuarios</string>
+    <string name="gestion_usuarios_agregar">+ Nuevo</string>
+    <string name="gestion_usuarios_crear_titulo">Crear nuevo usuario</string>
+    <string name="gestion_usuarios_editar_titulo">Editar usuario</string>
+    <string name="gestion_usuarios_nombre_label">Nombre completo</string>
+    <string name="gestion_usuarios_email_label">Email</string>
+    <string name="gestion_usuarios_password_label">Contraseña</string>
+    <string name="gestion_usuarios_rol_label">Rol</string>
+    <string name="gestion_usuarios_rol_admin">Admin</string>
+    <string name="gestion_usuarios_rol_tester">Tester</string>
+    <string name="gestion_usuarios_creado_exito">Usuario creado exitosamente</string>
+    <string name="gestion_usuarios_actualizado_exito">Usuario actualizado</string>
+    <string name="gestion_usuarios_eliminado_exito">Usuario eliminado</string>
+    <string name="gestion_usuarios_confirmar_eliminar">¿Estás seguro de que deseas eliminar a %s?</string>
+    <string name="gestion_usuarios_error_campos_vacios">Complete todos los campos</string>
+    <string name="gestion_usuarios_error_password_corto">La contraseña debe tener al menos 6 caracteres</string>
+    <string name="gestion_usuarios_sin_usuarios">No hay usuarios registrados</string>
+
 </resources>

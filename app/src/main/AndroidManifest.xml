@@ -30,6 +30,12 @@
             android:exported="false"
             android:parentActivityName=".MainActivity"/>
 
+        <!-- Pantalla 4: Gestión de Usuarios (Admin) -->
+        <activity
+            android:name=".GestionUsuariosActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity"/>
+
     </application>
 
 </manifest>

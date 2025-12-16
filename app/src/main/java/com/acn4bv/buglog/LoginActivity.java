@@ -34,7 +34,7 @@ public class LoginActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
 
         if (auth.getCurrentUser() != null) {
-            abrirMain();
+            cargarRolYAbrirMain();
             return;
         }
 
@@ -55,15 +55,14 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         // Completa admin o tester en un email
-        String email = user + "@buglog.com";
+        String email = user.contains("@") ? user : user + "@buglog.com";
 
         progressBar.setVisibility(View.VISIBLE);
         btnLogin.setEnabled(false);
 
         auth.signInWithEmailAndPassword(email, pass)
                 .addOnSuccessListener(r -> {
-                    progressBar.setVisibility(View.GONE);
-                    abrirMain();
+                    cargarRolYAbrirMain();
                 })
                 .addOnFailureListener(e -> {
                     progressBar.setVisibility(View.GONE);
@@ -74,9 +73,12 @@ public class LoginActivity extends AppCompatActivity {
                 });
     }
 
-    private void abrirMain() {
-        Intent i = new Intent(LoginActivity.this, MainActivity.class);
-        startActivity(i);
-        finish();
+    private void cargarRolYAbrirMain() {
+        UserRole.loadUserRole(() -> {
+            progressBar.setVisibility(View.GONE);
+            Intent i = new Intent(LoginActivity.this, MainActivity.class);
+            startActivity(i);
+            finish();
+        });
     }
 }

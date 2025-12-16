@@ -5,25 +5,25 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
-import android.view. Gravity;
-import android.view. View;
-import android.view. ViewGroup;
-import android.widget. Button;
+import android.view.Gravity;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget. ImageButton;
+import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget. LinearLayout;
-import android.widget. PopupMenu;
-import android.widget. Spinner;
-import android.widget. TextView;
-import android.widget. ArrayAdapter;
+import android.widget.LinearLayout;
+import android.widget.PopupMenu;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.ArrayAdapter;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
-import com.bumptech.glide.load. resource.bitmap.RoundedCorners;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -37,15 +37,22 @@ public class ListaBugsActivity extends AppCompatActivity {
     private String filtroActual = "TODOS";
 
     private FirebaseFirestore db;
+    private boolean isAdmin = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_bugs);
 
-        containerBugs = findViewById(R. id.containerBugs);
+        containerBugs = findViewById(R.id.containerBugs);
 
         db = FirebaseFirestore.getInstance();
+
+        // Cargar el rol del usuario
+        UserRole.loadUserRole(() -> {
+            isAdmin = UserRole.isAdmin();
+            cargarBugs();
+        });
 
         Button btnVolver = findViewById(R.id.btnVolver);
         btnVolver.setOnClickListener(v -> {
@@ -55,7 +62,6 @@ public class ListaBugsActivity extends AppCompatActivity {
             finish();
         });
 
-        cargarBugs();
         agregarBotonFlotanteFiltro();
     }
 
@@ -63,9 +69,9 @@ public class ListaBugsActivity extends AppCompatActivity {
         ViewGroup root = findViewById(android.R.id.content);
         Resources res   = getResources();
 
-        int sizePx = res.getDimensionPixelSize(R. dimen.button_height);
+        int sizePx = res.getDimensionPixelSize(R.dimen.button_height);
         int padPx  = res.getDimensionPixelSize(R.dimen.padding_small);
-        int mPx    = res.getDimensionPixelSize(R.dimen. margin_medium);
+        int mPx    = res.getDimensionPixelSize(R.dimen.margin_medium);
 
         ImageButton fab = new ImageButton(this);
         fab.setLayoutParams(new ViewGroup.LayoutParams(sizePx, sizePx));
@@ -81,14 +87,14 @@ public class ListaBugsActivity extends AppCompatActivity {
 
         LinearLayout wrapper = new LinearLayout(this);
         wrapper.setLayoutParams(new ViewGroup.LayoutParams(
-                ViewGroup.LayoutParams. MATCH_PARENT,
-                ViewGroup.LayoutParams. MATCH_PARENT
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT
         ));
-        wrapper.setGravity(Gravity. BOTTOM | Gravity.END);
+        wrapper.setGravity(Gravity.BOTTOM | Gravity.END);
 
         ViewGroup.MarginLayoutParams lp = new ViewGroup.MarginLayoutParams(sizePx, sizePx);
         lp.rightMargin  = mPx;
-        lp. bottomMargin = mPx;
+        lp.bottomMargin = mPx;
         fab.setLayoutParams(lp);
 
         fab.setOnClickListener(v -> mostrarBottomSheetFiltros());
@@ -114,19 +120,19 @@ public class ListaBugsActivity extends AppCompatActivity {
             opcion.setTextSize(16f);
             opcion.setTextColor(Color.WHITE);
             opcion.setPadding(32, 24, 32, 24);
-            opcion.setTypeface(null, android.graphics. Typeface.BOLD);
+            opcion.setTypeface(null, android.graphics.Typeface.BOLD);
 
             if (filtroActual.equalsIgnoreCase(filtro)) {
                 GradientDrawable selectedBg = new GradientDrawable();
-                selectedBg. setCornerRadius(20);
+                selectedBg.setCornerRadius(20);
                 selectedBg.setColor(Color.parseColor("#EC4899"));
-                opcion. setBackground(selectedBg);
+                opcion.setBackground(selectedBg);
             }
 
             opcion.setOnClickListener(v -> {
-                filtroActual = filtro. toUpperCase();
+                filtroActual = filtro.toUpperCase();
                 cargarBugs();
-                dialog. dismiss();
+                dialog.dismiss();
             });
 
             layout.addView(opcion);
@@ -149,7 +155,7 @@ public class ListaBugsActivity extends AppCompatActivity {
 
                         String id          = doc.getId();
                         String nombreJuego = doc.getString("nombreJuego");
-                        String plataforma  = doc. getString("plataforma");
+                        String plataforma  = doc.getString("plataforma");
                         String tipo        = doc.getString("tipo");
                         String gravedad    = doc.getString("gravedad");
                         String descripcion = doc.getString("descripcion");
@@ -177,7 +183,7 @@ public class ListaBugsActivity extends AppCompatActivity {
                     }
 
                     Resources res = getResources();
-                    int marginTop = res.getDimensionPixelSize(R.dimen. margin_medium);
+                    int marginTop = res.getDimensionPixelSize(R.dimen.margin_medium);
 
                     for (Bug bug : bugsFiltrados) {
                         containerBugs.addView(crearCard(bug, marginTop));
@@ -212,7 +218,7 @@ public class ListaBugsActivity extends AppCompatActivity {
         LinearLayout mainLayout = new LinearLayout(this);
         mainLayout.setOrientation(LinearLayout.HORIZONTAL);
         mainLayout.setLayoutParams(new LinearLayout.LayoutParams(
-                ViewGroup.LayoutParams. MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT
         ));
 
@@ -222,15 +228,15 @@ public class ListaBugsActivity extends AppCompatActivity {
             int heightPx = (int) (180 * getResources().getDisplayMetrics().density);
             LinearLayout.LayoutParams imgLp = new LinearLayout.LayoutParams(widthPx, heightPx);
             cover.setLayoutParams(imgLp);
-            cover. setScaleType(ImageView.ScaleType.CENTER_CROP);
+            cover.setScaleType(ImageView.ScaleType.CENTER_CROP);
 
             Glide.with(this)
                     .load(bug.getImagenUrl())
-                    . transform(new CenterCrop(), new RoundedCorners(24))
+                    .transform(new CenterCrop(), new RoundedCorners(24))
                     .placeholder(android.R.color.darker_gray)
                     .into(cover);
 
-            mainLayout. addView(cover);
+            mainLayout.addView(cover);
         }
 
         LinearLayout contentLayout = new LinearLayout(this);
@@ -250,12 +256,12 @@ public class ListaBugsActivity extends AppCompatActivity {
         titulo.setText(bug.getNombreJuego() + " • " + bug.getPlataforma() + " • " + bug.getTipo());
         titulo.setTextSize(14f);
         titulo.setTextColor(getColor(R.color.text_primary));
-        titulo.setTypeface(null, android.graphics. Typeface.BOLD);
+        titulo.setTypeface(null, android.graphics.Typeface.BOLD);
         titulo.setPadding(0, 12, 0, 0);
 
         TextView cuerpo = new TextView(this);
         cuerpo.setText(bug.getDescripcion());
-        cuerpo.setTextColor(getColor(R.color. text_secondary));
+        cuerpo.setTextColor(getColor(R.color.text_secondary));
         cuerpo.setTextSize(13f);
         cuerpo.setPadding(0, 8, 0, 0);
         cuerpo.setMaxLines(3);
@@ -264,8 +270,8 @@ public class ListaBugsActivity extends AppCompatActivity {
         contentLayout.addView(titulo);
         contentLayout.addView(cuerpo);
 
-        // Botones admin con diseño mejorado
-        if (UserRole.isAdmin()) {
+        // Botones admin - AHORA USA isAdmin en lugar de UserRole.isAdmin()
+        if (isAdmin) {
             LinearLayout row = new LinearLayout(this);
             row.setOrientation(LinearLayout.HORIZONTAL);
             row.setPadding(0, 16, 0, 0);
@@ -278,7 +284,7 @@ public class ListaBugsActivity extends AppCompatActivity {
 
             // Botón ELIMINAR (rojo, izquierda)
             Button btnBorrar = new Button(this);
-            LinearLayout.LayoutParams btnBorrarParams = new LinearLayout. LayoutParams(
+            LinearLayout.LayoutParams btnBorrarParams = new LinearLayout.LayoutParams(
                     0,
                     (int) (48 * getResources().getDisplayMetrics().density),
                     1f
@@ -290,18 +296,18 @@ public class ListaBugsActivity extends AppCompatActivity {
             btnBorrar.setAllCaps(false);
             btnBorrar.setTextSize(14f);
             btnBorrar.setTextColor(Color.WHITE);
-            btnBorrar. setTypeface(null, android.graphics.Typeface.BOLD);
+            btnBorrar.setTypeface(null, android.graphics.Typeface.BOLD);
 
             GradientDrawable bgBorrar = new GradientDrawable();
             bgBorrar.setCornerRadius(10 * getResources().getDisplayMetrics().density);
-            bgBorrar.setColor(Color. parseColor("#EF4444"));
+            bgBorrar.setColor(Color.parseColor("#EF4444"));
             btnBorrar.setBackground(bgBorrar);
 
             btnBorrar.setOnClickListener(v -> borrarBug(bug));
 
             // Botón EDITAR (gradiente rosa-púrpura, derecha)
             Button btnEditar = new Button(this);
-            LinearLayout. LayoutParams btnEditarParams = new LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams btnEditarParams = new LinearLayout.LayoutParams(
                     0,
                     (int) (48 * getResources().getDisplayMetrics().density),
                     1f
@@ -310,16 +316,16 @@ public class ListaBugsActivity extends AppCompatActivity {
             btnEditar.setLayoutParams(btnEditarParams);
 
             btnEditar.setText("Editar");
-            btnEditar. setAllCaps(false);
+            btnEditar.setAllCaps(false);
             btnEditar.setTextSize(14f);
-            btnEditar.setTextColor(Color. WHITE);
-            btnEditar. setTypeface(null, android. graphics.Typeface.BOLD);
+            btnEditar.setTextColor(Color.WHITE);
+            btnEditar.setTypeface(null, android.graphics.Typeface.BOLD);
 
             GradientDrawable bgEditar = new GradientDrawable(
-                    GradientDrawable. Orientation.TL_BR,
+                    GradientDrawable.Orientation.TL_BR,
                     new int[]{
-                            Color. parseColor("#EC4899"),
-                            Color. parseColor("#8B5CF6")
+                            Color.parseColor("#EC4899"),
+                            Color.parseColor("#8B5CF6")
                     }
             );
             bgEditar.setCornerRadius(10 * getResources().getDisplayMetrics().density);
@@ -353,9 +359,9 @@ public class ListaBugsActivity extends AppCompatActivity {
 
         EditText etNombre      = view.findViewById(R.id.etEditNombre);
         Spinner  spPlataforma  = view.findViewById(R.id.spEditPlataforma);
-        Spinner  spTipo        = view. findViewById(R.id.spEditTipo);
-        Spinner  spGravedad    = view. findViewById(R.id.spEditGravedad);
-        EditText etDescripcion = view. findViewById(R.id.etEditDescripcion);
+        Spinner  spTipo        = view.findViewById(R.id.spEditTipo);
+        Spinner  spGravedad    = view.findViewById(R.id.spEditGravedad);
+        EditText etDescripcion = view.findViewById(R.id.etEditDescripcion);
         EditText etImagenUrl   = view.findViewById(R.id.etEditImagenUrl);
 
         Button btnGuardar = view.findViewById(R.id.btnGuardar);
@@ -371,7 +377,7 @@ public class ListaBugsActivity extends AppCompatActivity {
                 R.layout.spinner_item
         );
         adapterPlat.setDropDownViewResource(R.layout.spinner_dropdown_item);
-        spPlataforma. setAdapter(adapterPlat);
+        spPlataforma.setAdapter(adapterPlat);
 
         ArrayAdapter<CharSequence> adapterTipo = ArrayAdapter.createFromResource(
                 this,
@@ -383,7 +389,7 @@ public class ListaBugsActivity extends AppCompatActivity {
 
         String[] opcionesGravedad = {
                 getString(R.string.gravedad_baja),
-                getString(R. string.gravedad_media),
+                getString(R.string.gravedad_media),
                 getString(R.string.gravedad_alta)
         };
         ArrayAdapter<String> adapterGrav = new ArrayAdapter<>(
@@ -397,7 +403,7 @@ public class ListaBugsActivity extends AppCompatActivity {
         int indexPlat = adapterPlat.getPosition(bug.getPlataforma());
         if (indexPlat >= 0) spPlataforma.setSelection(indexPlat);
 
-        int indexTipo = adapterTipo. getPosition(bug.getTipo());
+        int indexTipo = adapterTipo.getPosition(bug.getTipo());
         if (indexTipo >= 0) spTipo.setSelection(indexTipo);
 
         int indexGrav = 0;
@@ -410,7 +416,7 @@ public class ListaBugsActivity extends AppCompatActivity {
 
         btnGuardar.setOnClickListener(v -> {
 
-            String nombre = etNombre. getText().toString().trim();
+            String nombre = etNombre.getText().toString().trim();
             String plataforma  = spPlataforma.getSelectedItem().toString();
             String tipo        = spTipo.getSelectedItem().toString();
             String gravedad    = spGravedad.getSelectedItem().toString();
@@ -439,11 +445,11 @@ public class ListaBugsActivity extends AppCompatActivity {
     private TextView crearBadgeGravedad(String gravedad) {
         if (gravedad == null) return null;
 
-        String g = gravedad. toUpperCase();
+        String g = gravedad.toUpperCase();
         Integer color = null;
         String texto = null;
 
-        if (g. contains("BAJA")) {
+        if (g.contains("BAJA")) {
             texto = "PRIORIDAD BAJA";
             color = Color.parseColor("#10B981");
         } else if (g.contains("MEDIA")) {
